@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Taskboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Auth screen -->
+  <main id="auth" class="auth">
+    <section class="auth-card">
+      <h1>Taskboard</h1>
+      <p class="muted" id="auth-sub">Log in to see your tasks.</p>
+      <form id="auth-form">
+        <input id="name" placeholder="Your name" autocomplete="name" hidden>
+        <input id="email" type="email" placeholder="Email" autocomplete="email" required>
+        <input id="password" type="password" placeholder="Password (6+ characters)" autocomplete="current-password" required minlength="6">
+        <p id="auth-error" class="error" role="alert"></p>
+        <button class="btn primary" id="auth-submit">Log in</button>
+      </form>
+      <button class="link" id="auth-toggle">New here? Create an account</button>
+    </section>
+  </main>
+
+  <!-- App screen -->
+  <div id="app" hidden>
+    <header class="top">
+      <h1>Taskboard</h1>
+      <div class="who">
+        <span id="live" class="live" title="Live updates">Live</span>
+        <span id="user-name"></span>
+        <button class="btn" id="logout">Log out</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <form id="task-form" class="panel">
+        <h2 id="form-title">New task</h2>
+        <input id="t-title" placeholder="What needs doing?" required maxlength="120">
+        <textarea id="t-desc" placeholder="Details (optional)" rows="3"></textarea>
+        <div class="row">
+          <label>Priority
+            <select id="t-priority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select>
+          </label>
+          <label>Status
+            <select id="t-status"><option value="todo">To do</option><option value="in-progress">In progress</option><option value="done">Done</option></select>
+          </label>
+        </div>
+        <label>Due date <input id="t-due" type="date"></label>
+        <div class="row">
+          <button class="btn primary" id="t-save">Add task</button>
+          <button type="button" class="btn" id="t-cancel" hidden>Cancel</button>
+        </div>
+      </form>
+
+      <section>
+        <nav class="filters" id="filters">
+          <button class="chip active" data-f="">All <b id="c-all">0</b></button>
+          <button class="chip" data-f="todo">To do <b id="c-todo">0</b></button>
+          <button class="chip" data-f="in-progress">In progress <b id="c-in-progress">0</b></button>
+          <button class="chip" data-f="done">Done <b id="c-done">0</b></button>
+        </nav>
+        <ul id="list" class="list"></ul>
+        <p id="empty" class="muted" hidden>No tasks here yet. Add one using the form.</p>
+      </section>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
